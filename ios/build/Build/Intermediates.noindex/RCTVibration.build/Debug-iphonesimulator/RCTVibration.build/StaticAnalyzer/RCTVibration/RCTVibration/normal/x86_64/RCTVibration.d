@@ -1,0 +1,5 @@
+dependencies: \
+  /Users/macluis/Desarrollo/cursos/rn18/node_modules/react-native/Libraries/Vibration/RCTVibration.m \
+  /Users/macluis/Desarrollo/cursos/rn18/node_modules/react-native/Libraries/Vibration/RCTVibration.h \
+  /Users/macluis/Desarrollo/cursos/rn18/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
+  /Users/macluis/Desarrollo/cursos/rn18/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h
