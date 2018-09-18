@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Button } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import styles from './styles'
 
 export default class extends Component {
 
@@ -15,7 +16,7 @@ export default class extends Component {
 
     render() {
         return (
-            <View style={{ flex: 1, backgroundColor: 'blue', alignItems: 'center', justifyContent: 'center' }}>
+            <View style={styles.container}>
                 <Text style={{color: 'white', fontWeight: '600'}}>CASAS</Text>
 
                 <Button 
