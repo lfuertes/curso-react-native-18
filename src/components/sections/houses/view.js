@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, FlatList, Alert } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { HouseCell  } from '../../widgets/'
 import * as api from '../../../api/'
 import styles from './styles'
 
@@ -49,41 +50,9 @@ export default class extends Component {
                     data={this.state.housesList}
                     renderItem={ value => this._renderItem(value) }
                     keyExtractor={ (item, i) => 'cell' + item.id }
-                    extraData={this.state}
+                    extraData={this.state.selected}
                 />
             </View>
-        )
-    }
-}
-
-class HouseCell extends Component {
-
-    static defaultProps = {
-        house: null,
-        seleccionada: null,
-        onHousePress: () => {},
-    }
-
-    render() {
-        const { house, seleccionada } = this.props
-        const name = house ? house.nombre : ''
-        const isSelected = seleccionada && seleccionada.id == house.id ? true : false
-        const backgroundColor = isSelected ? 'lime' : 'green'
-
-        return (
-            <TouchableOpacity 
-                onPress={ () => this.props.onHousePress(house) } 
-                style={{
-                    height: 120,
-                    borderWidth: 1, 
-                    borderColor: 'blue', 
-                    alignItems: 'center', 
-                    justifyContent: 'center',
-                    backgroundColor: backgroundColor,
-                }}
-            >
-                <Text>{name}</Text>
-            </TouchableOpacity>
         )
     }
 }
