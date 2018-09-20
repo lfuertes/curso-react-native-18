@@ -1,27 +1,27 @@
 import React, { Component } from 'react'
-import { TouchableOpacity, Text } from 'react-native'
+import { TouchableOpacity, Image } from 'react-native'
 import styles from './styles'
 
 export default class extends Component {
 
     static defaultProps = {
         house: null,
-        seleccionada: null,
         onHousePress: () => {},
     }
 
     render() {
-        const { house, seleccionada } = this.props
-        const name = house ? house.nombre : ''
-        const isSelected = seleccionada && seleccionada.id == house.id ? true : false
-        const backgroundColor = isSelected ? 'lime' : 'green'
-
+        const { house } = this.props
+        const image = house.image_dir ? { uri: house.image_dir } : require('../../../resources/placeholder.jpg')
         return (
             <TouchableOpacity 
                 onPress={ () => this.props.onHousePress(house) } 
-                style={[styles.cellContainer, { backgroundColor: backgroundColor}]}
+                style={styles.cellContainer}
             >
-                <Text>{name}</Text>
+               <Image
+                    source={image}
+                    style={{ width: '100%', height: '100%'}}
+                    resizeMode={'cover'}
+                />
             </TouchableOpacity>
         )
     }

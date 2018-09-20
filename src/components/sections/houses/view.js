@@ -51,6 +51,8 @@ export default class extends Component {
                     renderItem={ value => this._renderItem(value) }
                     keyExtractor={ (item, i) => 'cell' + item.id }
                     extraData={this.state.selected}
+                    numColumns={2}
+                    style={{paddingTop: 40}}
                 />
             </View>
         )
