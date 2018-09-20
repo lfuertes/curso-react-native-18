@@ -10,6 +10,7 @@ export default class extends Component {
         super(props)
         this.state = {
             housesList: [],
+            selected: null,
         }
     }
 
@@ -28,11 +29,17 @@ export default class extends Component {
     }
 
     _onHouseTapped(house) {
-        Alert.alert('Casa:', house.nombre)
+        this.setState({ selected: house })
     }
 
     _renderItem({ item }) {
-        return <HouseCell house={item} onHousePress={ v => this._onHouseTapped(v) } />
+        return ( 
+            <HouseCell 
+                house={item} 
+                onHousePress={ v => this._onHouseTapped(v) } 
+                seleccionada={this.state.selected}
+            />
+        )
     }
 
     render() {
@@ -42,6 +49,7 @@ export default class extends Component {
                     data={this.state.housesList}
                     renderItem={ value => this._renderItem(value) }
                     keyExtractor={ (item, i) => 'cell' + item.id }
+                    extraData={this.state}
                 />
             </View>
         )
@@ -52,14 +60,28 @@ class HouseCell extends Component {
 
     static defaultProps = {
         house: null,
+        seleccionada: null,
         onHousePress: () => {},
     }
 
     render() {
-        const { house } = this.props
+        const { house, seleccionada } = this.props
         const name = house ? house.nombre : ''
+        const isSelected = seleccionada && seleccionada.id == house.id ? true : false
+        const backgroundColor = isSelected ? 'lime' : 'green'
+
         return (
-            <TouchableOpacity onPress={ () => this.props.onHousePress(house) } style={{height: 120, borderWidth: 1, borderColor: 'blue', alignItems: 'center', justifyContent: 'center'}}>
+            <TouchableOpacity 
+                onPress={ () => this.props.onHousePress(house) } 
+                style={{
+                    height: 120,
+                    borderWidth: 1, 
+                    borderColor: 'blue', 
+                    alignItems: 'center', 
+                    justifyContent: 'center',
+                    backgroundColor: backgroundColor,
+                }}
+            >
                 <Text>{name}</Text>
             </TouchableOpacity>
         )
