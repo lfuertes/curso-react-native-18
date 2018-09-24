@@ -20,15 +20,15 @@ class Characters extends Component {
 
 
 const mapStateToProps = (state) => {
+    console.log("state: ", state)
     return {
-        isFetching: state.characters.isFetching
+
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
         fetchHouseCharacters: () => {
-            console.log("fetchHouseCharacters")
         }
     }
 }
