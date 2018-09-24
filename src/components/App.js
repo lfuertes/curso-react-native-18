@@ -12,7 +12,7 @@ import * as reducers from '../redux/'
 const reducer = combineReducers(reducers)
 const store = createStore(
     reducer,
-    applyMiddleware(thunk)
+    applyMiddleware(thunk.withExtraArgument(api))
 )
 
 export default class App extends Component {

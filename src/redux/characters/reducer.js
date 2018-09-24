@@ -25,7 +25,7 @@ export default function reducer(state = initialState, action = {}) {
         case types.CHARACTERS_SET_ITEM:
             return {
                 ...state,
-                item: action.value
+                item: action.value,
             }
 
         default: 
