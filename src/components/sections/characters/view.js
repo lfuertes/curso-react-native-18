@@ -12,12 +12,12 @@ class Characters extends Component {
     }
     
     _renderItem(item, index) {
-        return <CharacterCell character={item} />
+        return <CharacterCell character={item} onCharacterPress={this.props.onCharacterTapped} />
     }
 
     render() {
         const { list, isFetching } = this.props
-        console.log("list: ", list)
+ 
         return (
             <View style={styles.container}>
                 <FlatList
@@ -42,6 +42,9 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         fetchHouseCharacters: () => {
             dispatch(CharactersActions.fetchHouseCharacters())
+        },
+        onCharacterTapped: (character) => {
+            dispatch(CharactersActions.setItem(character))
         }
     }
 }
