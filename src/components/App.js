@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StatusBar, TouchableOpacity, Text } from 'react-native'
 import { Router, Scene, Stack, Actions } from 'react-native-router-flux'
-import { Houses, Characters, CharacterDetail } from './sections/'
+import { Houses, Characters, CharacterDetail, CharacterAdd } from './sections/'
 import * as api from '../api/'
 
 import { createStore, applyMiddleware, combineReducers } from 'redux'
@@ -23,7 +23,7 @@ const sceneDefaultStyles = {
 }
 
 const RightButton = props => (
-    <TouchableOpacity style={{padding: 10}} onPress={() => {}}>
+    <TouchableOpacity style={{padding: 10}} onPress={ () => Actions.characterAdd() }>
         <Text style={{color: 'white', fontWeight: 'bold'}}>{'Añadir'}</Text>
     </TouchableOpacity>
 )
@@ -40,7 +40,12 @@ export default class App extends Component {
             <Provider store={store}>
                 <Router>
                     <Stack key="root">
-                        <Scene key="houses" component={Houses} hideNavBar={true} initial={true} />
+                        <Scene 
+                            key="houses" 
+                            component={Houses} 
+                            hideNavBar={true} 
+                            initial={true} 
+                        />
                         <Scene 
                             key="characters" 
                             component={Characters} 
@@ -50,6 +55,12 @@ export default class App extends Component {
                         <Scene 
                             key={'characterDetail'}
                             component={CharacterDetail}
+                            {...sceneDefaultStyles}
+                        />
+                        <Scene 
+                            key={'characterAdd'}
+                            component={CharacterAdd}
+                            title={'Añadir'}
                             {...sceneDefaultStyles}
                         />
                     </Stack>
