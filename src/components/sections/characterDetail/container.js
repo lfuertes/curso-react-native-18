@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 const mapStateToProps = (state) => {
     return {
-
+        character: state.characters.item,
     }
 }
 

@@ -28,7 +28,9 @@ export function fetchHouseCharacters() {
             return
         }
 
+        dispatch(setList([]))
         dispatch(setFetching(true))
+        
         api
             .fetchHouseCharacters(house.id)
             .then( res => {
