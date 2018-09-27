@@ -5,7 +5,7 @@ import View from './view'
 const mapStateToProps = (state) => {
     return {
         house: state.houses.item,
-        isFetching: state.characters.isFetching || state.houses.isFetching
+        isFetching: state.characters.isFetching
     }
 }
 

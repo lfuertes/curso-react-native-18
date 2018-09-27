@@ -48,7 +48,10 @@ export default class extends React.Component {
                 </View>
 
                 <View style={{margin: 20}}>
-                    <Button label={this.state.imageExpanded ? 'OCULTAR IMAGEN' : 'MOSTRAR IMAGEN'} onPress={() => this._onShowImage() } />
+                    <Button 
+                        label={this.state.imageExpanded ? 'OCULTAR IMAGEN' : 'MOSTRAR IMAGEN'} 
+                        onPress={() => this._onShowImage() } 
+                    />
                 </View>
                 <View style={{margin: 20}}>
                     <Button label={'EDITAR'} />

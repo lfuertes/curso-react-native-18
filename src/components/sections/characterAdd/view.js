@@ -16,6 +16,8 @@ export default class extends Component {
 
         this.options = {
             title: 'Seleccionar imagen',
+            maxWidth: 640,
+            maxHeight: 640,
             storageOptions: {
               skipBackup: true,
               path: 'images'
@@ -104,7 +106,11 @@ export default class extends Component {
                 </View>
 
                 <View style={{paddingHorizontal: 20, paddingBottom: 20}}>
-                    <Button label={'Guardar'.toUpperCase()} onPress={() => this._onSubmit()}/>
+                    <Button 
+                        label={'Guardar'.toUpperCase()} 
+                        onPress={() => this._onSubmit()} 
+                        isFetching={this.props.isFetching} 
+                    />
                 </View>
  
             </View>
