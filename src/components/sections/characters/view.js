@@ -12,6 +12,12 @@ class Characters extends Component {
         this.props.fetchHouseCharacters()
     }
     
+    _onEndReached(i) {
+        console.log("_onEndReached i: ", i)
+        //this.props.updatePage()
+        //this.props.fetchHouseCharacters()
+    }
+    
     _renderItem(item, index) {
         return <CharacterCell 
                     character={item} 
@@ -29,6 +35,9 @@ class Characters extends Component {
                     data={list}
                     renderItem={({ item, index}) => this._renderItem(item, index) }
                     keyExtractor={(item, i) => 'character' + i}
+                    onRefresh={ () => this.props.fetchHouseCharacters()}
+                    refreshing={this.props.isFetching}
+                    onEndReached={ (i) => this._onEndReached(i)}
                 />
             </View>
         )
