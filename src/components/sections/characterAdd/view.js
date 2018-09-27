@@ -11,6 +11,7 @@ export default class extends Component {
         this.state = {
             name: '',
             age: '',
+            image: null,
         }
 
         this.options = {
@@ -24,25 +25,11 @@ export default class extends Component {
 
     _onImagePickerTapped() {
         ImagePicker.showImagePicker(this.options, (response) => {
-          
-            if (response.didCancel) {
-              console.log('User cancelled image picker');
-            }
-            else if (response.error) {
-              console.log('ImagePicker Error: ', response.error);
-            }
-            else if (response.customButton) {
-              console.log('User tapped custom button: ', response.customButton);
-            }
-            else {
-                console.log('response: ', response);
-              let source = { uri: response.uri };
-          
-              // You can also display the image using data:
-              // let source = { uri: 'data:image/jpeg;base64,' + response.data };
-          
+            if (response.uri && response.data) {
+              let preview = { uri: response.uri };
+              let data = 'data:image/jpeg;base64,' + response.data 
               this.setState({
-                avatarSource: source
+                image: { preview, data }
               });
             }
           });
@@ -60,12 +47,13 @@ export default class extends Component {
     }
 
     _renderImageInput() {
-        const imageUri = this.state.avatarSource ? { uri: this.state.avatarSource.uri } : null
+        const imageUri = this.state.image ? this.state.image.preview : null
+        const imageLabel = this.state.image ? 'Pulsa para escoger otra imagen' : 'Pulsa para elegir imagen'
         return (
-            <View>
-                <TouchableOpacity style={{}} onPress={() => this._onImagePickerTapped()}>
-                    <Image source={imageUri} style={{ width: 200, height: 200 }} resizeMode={'contain'} />
-                    <Text style={{color: 'white', fontWeight: 'bold'}}>{'Pulsa para elegir imagen'}</Text>
+            <View style={{marginTop: 20}}>
+                <TouchableOpacity style={styles.imageContainer} onPress={() => this._onImagePickerTapped()}>
+                    <Image source={imageUri} style={styles.image} resizeMode={'cover'} />
+                    <Text style={styles.imageText}>{imageLabel}</Text>
                 </TouchableOpacity>
             </View>
         )
