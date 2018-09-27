@@ -1,4 +1,5 @@
 import * as types from './types'
+import { AsyncStorage } from 'react-native'
 
 function setFetching(value) {
     return {
@@ -23,12 +24,22 @@ export function setItem(value) {
 
 export function fetchHousesList() {
     return (dispatch, getState, api) => {
-        dispatch(setFetching(true))
+
+        AsyncStorage.getItem('housesList', (error, result) => {
+            if(result && !error) {
+                const housesList = JSON.parse(result)
+                dispatch(setList(housesList))
+            } else {
+                dispatch(setFetching(true))
+            }
+        })
+
         api
             .fetchHouses()
             .then( res => {
                 dispatch(setFetching(false))
                 dispatch(setList(res.data.records))
+                AsyncStorage.setItem('housesList', JSON.stringify(res.data.records))
             })
             .catch( err => {
                 dispatch(setFetching(false))
