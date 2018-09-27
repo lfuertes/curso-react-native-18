@@ -34,7 +34,7 @@ class Characters extends Component {
                 <FlatList
                     data={list}
                     renderItem={({ item, index}) => this._renderItem(item, index) }
-                    keyExtractor={(item, i) => 'character' + i}
+                    keyExtractor={(item, i) => 'character' + item.id}
                     onRefresh={ () => this.props.fetchHouseCharacters()}
                     refreshing={this.props.isFetching}
                     onEndReached={ (i) => this._onEndReached(i)}

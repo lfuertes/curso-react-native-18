@@ -8,11 +8,21 @@ export default class extends Component {
 
     constructor(props) {
         super(props)
-        this.state = {
-            name: '',
-            age: '',
-            image: null,
+
+        if(props.isEdit && props.character) {
+            this.state = {
+                name: props.character.nombre,
+                age: props.character.edad.toString(),
+                image: { preview: {uri: props.character.image_dir }},
+            }
+        } else {
+            this.state = {
+                name: '',
+                age: '',
+                image: null,
+            }
         }
+
 
         this.options = {
             title: 'Seleccionar imagen',
@@ -37,12 +47,25 @@ export default class extends Component {
     _onSubmit() {
         if(this._validateForm()) {
             const {name, age, image} = this.state 
-            const data = {
-                nombre: name,
-                edad: age, 
-                image: image.data,
+            if(this.props.isEdit) {
+                const characterId = this.props.character.id
+                const imageData = this.state.image.data ? { image: this.setState.iamge.data } : {}
+                const data = {
+                    ...imageData,
+                    nombre: name,
+                    edad: age, 
+                }
+                // FUNCION PARA HACER PATCH
+                //this.props.onSubmitCharacter(data)
+            } else {
+                const data = {
+                    nombre: name,
+                    edad: age,
+                    image: image.data, 
+
+                }
+                this.props.onSubmitCharacter(data)
             }
-            this.props.onSubmitCharacter(data)
         } else {
             Alert.alert('Atención', 'Complete todos los campos')
         }

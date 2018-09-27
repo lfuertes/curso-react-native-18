@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StatusBar, TouchableOpacity, Text } from 'react-native'
 import { Router, Scene, Stack, Actions } from 'react-native-router-flux'
-import { Houses, Characters, CharacterDetail, CharacterAdd } from './sections/'
+import { Houses, Characters, CharacterDetail, CharacterAdd, CharacterEdit } from './sections/'
 import * as api from '../api/'
 
 import { createStore, applyMiddleware, combineReducers } from 'redux'
@@ -63,6 +63,7 @@ export default class App extends Component {
                             title={'Añadir'}
                             {...sceneDefaultStyles}
                         />
+                        
                     </Stack>
                 </Router>
             </Provider>

@@ -2,6 +2,7 @@ import React from 'react'
 import { View, Text, Image, TouchableOpacity, Animated } from 'react-native'
 import styles from './styles'
 import { Button } from '../../widgets/'
+import { Actions } from 'react-native-router-flux'
 
 export default class extends React.Component {
 
@@ -54,7 +55,10 @@ export default class extends React.Component {
                     />
                 </View>
                 <View style={{margin: 20}}>
-                    <Button label={'EDITAR'} />
+                    <Button 
+                        label={'EDITAR'} 
+                        onPress={() => Actions.characterAdd({ character, isEdit: true })}
+                    />
                 </View>
             </View>
         )
