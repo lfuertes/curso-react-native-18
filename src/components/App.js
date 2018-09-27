@@ -44,7 +44,7 @@ export default class App extends Component {
                             key="houses" 
                             component={Houses} 
                             hideNavBar={true} 
-                            
+                            initial={true}
                         />
                         <Scene 
                             key="characters" 
@@ -62,7 +62,6 @@ export default class App extends Component {
                             component={CharacterAdd}
                             title={'Añadir'}
                             {...sceneDefaultStyles}
-                            initial={true} 
                         />
                     </Stack>
                 </Router>

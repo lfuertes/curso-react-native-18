@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, Alert } from 'react-native'
 import { Button, TextInput } from '../../widgets/'
 import styles from './styles'
 import ImagePicker from 'react-native-image-picker'
@@ -21,6 +21,29 @@ export default class extends Component {
               path: 'images'
             }
         };
+    }
+
+    _validateForm() {
+        const {name, age, image} = this.state 
+        if(name && age && image) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    _onSubmit() {
+        if(this._validateForm()) {
+            const {name, age, image} = this.state 
+            const data = {
+                nombre: name,
+                edad: age, 
+                image: image.data,
+            }
+            this.props.onSubmitCharacter(data)
+        } else {
+            Alert.alert('Atención', 'Complete todos los campos')
+        }
     }
 
     _onImagePickerTapped() {
@@ -48,7 +71,7 @@ export default class extends Component {
 
     _renderImageInput() {
         const imageUri = this.state.image ? this.state.image.preview : null
-        const imageLabel = this.state.image ? 'Pulsa para escoger otra imagen' : 'Pulsa para elegir imagen'
+        const imageLabel = this.state.image ? 'Pulsa para escoger otra imagen' : 'Pulsa para elegir imagen *'
         return (
             <View style={{marginTop: 20}}>
                 <TouchableOpacity style={styles.imageContainer} onPress={() => this._onImagePickerTapped()}>
@@ -64,12 +87,12 @@ export default class extends Component {
             <View style={styles.container}>
  
                 <View style={{paddingTop: 40, padding: 20}}>
-                    { this._renderTextInput('Nombre del personaje', 'name', 'Eddard Stark') }
+                    { this._renderTextInput('Nombre del personaje: *', 'name', 'Eddard Stark') }
                 </View>
 
                 <View style={{paddingHorizontal: 20, paddingBottom: 20}}>
                     <TextInput 
-                        label={'Edad del personaje:'}
+                        label={'Edad del personaje: *'}
                         value={this.state.age}
                         onChangeText={ age => this.setState({ age }) }
                         placeholder={'32'}
@@ -81,7 +104,7 @@ export default class extends Component {
                 </View>
 
                 <View style={{paddingHorizontal: 20, paddingBottom: 20}}>
-                    <Button label={'Guardar'.toUpperCase()} />
+                    <Button label={'Guardar'.toUpperCase()} onPress={() => this._onSubmit()}/>
                 </View>
  
             </View>
