@@ -13,7 +13,11 @@ class Characters extends Component {
     }
     
     _renderItem(item, index) {
-        return <CharacterCell character={item} onCharacterPress={this.props.onCharacterTapped} />
+        return <CharacterCell 
+                    character={item} 
+                    onCharacterPress={this.props.onCharacterTapped} 
+                    index={index} 
+                />
     }
 
     render() {
